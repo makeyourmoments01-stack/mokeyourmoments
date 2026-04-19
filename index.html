@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Make Your Moment 🌸 — Digital Invitation Templates</title>
+<meta name="description" content="Beautiful animated digital invitation templates for birthdays, weddings & pregnancy reveals. Share as a link on WhatsApp. Only ₹19!"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+:root{
+  --rose:#f4a7b9;
+  --rose-dark:#d4607a;
+  --gold:#d4a853;
+  --lav:#c9b8ef;
+  --lav-dark:#7c5cbf;
+  --dark:#0d0812;
+  --dark2:#1a0f2e;
+  --card-bg:rgba(255,255,255,0.03);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden;}
+
+/* ── STARS ── */
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+@keyframes twinkle{0%,100%{opacity:0.1;}50%{opacity:1;}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,8,18,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,0.1);}
+.nav-brand{font-family:'Great Vibes',cursive;font-size:1.8rem;color:#fff;text-decoration:none;text-shadow:0 0 20px rgba(244,167,185,0.4);}
+.nav-wa{display:flex;align-items:center;gap:6px;padding:8px 18px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);color:#25d366;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all 0.3s;}
+.nav-wa:hover{background:rgba(37,211,102,0.22);}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;z-index:1;}
+.hero-eyebrow{font-size:0.6rem;letter-spacing:8px;color:rgba(212,168,83,0.6);text-transform:uppercase;margin-bottom:16px;animation:fadeUp 1s 0.2s both;}
+.hero-title{font-family:'Great Vibes',cursive;font-size:clamp(3.5rem,12vw,7rem);color:#fff;line-height:1;text-shadow:0 0 60px rgba(244,167,185,0.45);animation:fadeUp 1s 0.4s both;}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,3vw,1.4rem);font-style:italic;color:rgba(255,179,198,0.65);margin-top:10px;animation:fadeUp 1s 0.6s both;}
+.hero-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:24px auto;animation:fadeUp 0.8s 0.8s both;}
+.hero-stats{display:flex;gap:40px;justify-content:center;margin-bottom:40px;animation:fadeUp 1s 1s both;}
+.stat{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--rose);font-weight:700;}
+.stat-label{font-size:0.62rem;letter-spacing:4px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-top:2px;}
+.scroll-hint{font-size:0.6rem;letter-spacing:5px;color:rgba(255,255,255,0.2);text-transform:uppercase;animation:bob 2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* ── SECTION ── */
+.section{padding:80px 20px;position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.section-eyebrow{font-size:0.6rem;letter-spacing:8px;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:10px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);text-align:center;color:#fff;margin-bottom:48px;font-style:italic;}
+
+/* ── TEMPLATE GRID ── */
+.templates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;}
+
+.template-card{background:var(--card-bg);border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer;position:relative;}
+.template-card:hover{transform:translateY(-8px);border-color:rgba(212,168,83,0.35);box-shadow:0 24px 60px rgba(0,0,0,0.4);}
+.template-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.3s;}
+.template-card:hover::before{opacity:1;}
+.card-birthday::before{background:linear-gradient(90deg,transparent,var(--rose),transparent);}
+.card-wedding::before{background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.card-pregnancy::before{background:linear-gradient(90deg,transparent,var(--lav),transparent);}
+
+.card-preview{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.card-birthday .card-preview{background:radial-gradient(ellipse at 50% 30%,#2a0018 0%,#0d0018 60%,#04000d 100%);}
+.card-wedding .card-preview{background:radial-gradient(ellipse at 50% 30%,#1a1200 0%,#0d0c00 60%,#04040d 100%);}
+.card-pregnancy .card-preview{background:radial-gradient(ellipse at 50% 30%,#1a0a1a 0%,#0d0818 60%,#04000d 100%);}
+
+.preview-emoji{font-size:4rem;filter:drop-shadow(0 0 20px rgba(255,255,255,0.3));animation:float 3s ease-in-out infinite;}
+.preview-emoji:nth-child(2){font-size:2rem;position:absolute;top:20px;right:30px;animation-delay:0.5s;}
+.preview-emoji:nth-child(3){font-size:1.5rem;position:absolute;bottom:25px;left:25px;animation-delay:1s;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+.card-badge{position:absolute;top:14px;left:14px;font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;border-radius:100px;font-weight:500;}
+.badge-birthday{background:rgba(212,96,122,0.2);border:1px solid rgba(212,96,122,0.4);color:var(--rose);}
+.badge-wedding{background:rgba(212,168,83,0.2);border:1px solid rgba(212,168,83,0.4);color:var(--gold);}
+.badge-pregnancy{background:rgba(201,184,239,0.2);border:1px solid rgba(201,184,239,0.4);color:var(--lav);}
+
+.card-body{padding:22px 20px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;margin-bottom:6px;font-style:italic;}
+.card-desc{font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:16px;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;}
+.card-price{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--rose);}
+.card-price span{font-size:0.7rem;color:rgba(255,255,255,0.3);font-family:'Jost',sans-serif;letter-spacing:2px;margin-left:4px;}
+.card-btn{padding:9px 22px;background:transparent;border:1px solid rgba(212,168,83,0.5);color:var(--gold);font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;}
+.card-btn:hover{background:rgba(212,168,83,0.1);}
+
+/* ── HOW IT WORKS ── */
+.how-section{background:rgba(255,255,255,0.015);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:80px 20px;}
+.steps-wrap{max-width:700px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;}
+.step{text-align:center;padding:20px 16px;position:relative;}
+.step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:28px;color:rgba(212,168,83,0.3);font-size:1.2rem;}
+.step-icon{font-size:2.2rem;margin-bottom:12px;display:block;}
+.step-title{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:6px;}
+.step-desc{font-size:0.72rem;color:rgba(255,255,255,0.35);line-height:1.6;}
+
+/* ── PRODUCT PAGE (hidden by default) ── */
+.product-page{display:none;position:fixed;inset:0;background:var(--dark);z-index:200;overflow-y:auto;}
+.product-page.show{display:block;}
+.product-back{position:fixed;top:20px;left:20px;z-index:201;display:flex;align-items:center;gap:6px;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);cursor:pointer;padding:10px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:100px;transition:all 0.3s;}
+.product-back:hover{color:#fff;background:rgba(255,255,255,0.1);}
+
+.product-inner{max-width:900px;margin:0 auto;padding:80px 20px 60px;}
+.product-tag{display:inline-block;font-size:0.58rem;letter-spacing:4px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:16px;}
+.product-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.5rem);color:#fff;font-style:italic;margin-bottom:10px;}
+.product-desc{font-size:0.9rem;color:rgba(255,255,255,0.45);line-height:1.8;max-width:600px;margin-bottom:32px;}
+
+.product-preview{width:100%;max-width:380px;height:300px;border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 32px;border:2px solid rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+.product-preview-inner{text-align:center;}
+.product-preview-emoji{font-size:5rem;display:block;filter:drop-shadow(0 0 30px rgba(255,255,255,0.2));animation:float 3s ease-in-out infinite;}
+.product-preview-label{font-family:'Great Vibes',cursive;font-size:2rem;color:rgba(255,255,255,0.5);margin-top:8px;}
+
+.product-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+@media(max-width:600px){.product-layout{grid-template-columns:1fr;}}
+
+.included-title{font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.included-list{list-style:none;}
+.included-list li{font-size:0.82rem;color:rgba(255,255,255,0.55);padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;}
+.included-list li::before{content:'✦';color:var(--gold);font-size:0.55rem;flex-shrink:0;}
+
+.buy-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:28px 24px;position:sticky;top:90px;}
+.buy-price{font-family:'Great Vibes',cursive;font-size:4rem;color:#fff;line-height:1;text-shadow:0 0 30px rgba(244,167,185,0.3);}
+.buy-note{font-size:0.65rem;letter-spacing:3px;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:24px;margin-top:4px;}
+.buy-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--rose-dark),#a0305a);border:none;color:#fff;font-family:'Jost',sans-serif;font-size:0.82rem;letter-spacing:4px;text-transform:uppercase;cursor:pointer;border-radius:4px;box-shadow:0 8px 28px rgba(212,96,122,0.35);transition:all 0.3s;margin-bottom:12px;}
+.buy-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,96,122,0.45);}
+.demo-btn{width:100%;padding:14px;background:transparent;border:1.5px solid var(--gold);color:var(--gold);font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:4px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:all 0.3s;margin-bottom:12px;text-decoration:none;display:block;text-align:center;}
+.demo-btn:hover{background:rgba(212,168,83,0.08);}
+.wa-btn{width:100%;padding:14px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);color:#25d366;font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:all 0.3s;text-decoration:none;display:block;text-align:center;}
+.wa-btn:hover{background:rgba(37,211,102,0.18);}
+.secure-note{font-size:0.6rem;letter-spacing:2px;color:rgba(255,255,255,0.2);text-transform:uppercase;text-align:center;margin-top:14px;}
+
+/* ── FOOTER ── */
+footer{padding:48px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:1;}
+.footer-brand{font-family:'Great Vibes',cursive;font-size:2.5rem;color:rgba(255,179,198,0.45);margin-bottom:6px;}
+.footer-tag{font-size:0.6rem;letter-spacing:5px;color:rgba(255,255,255,0.15);text-transform:uppercase;margin-bottom:20px;}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.footer-link{font-size:0.65rem;letter-spacing:3px;color:rgba(255,255,255,0.25);text-transform:uppercase;text-decoration:none;transition:color 0.3s;}
+.footer-link:hover{color:var(--gold);}
+
+/* ── SUCCESS MODAL ── */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;align-items:center;justify-content:center;padding:20px;}
+.modal.show{display:flex;}
+.modal-box{background:linear-gradient(160deg,#1a0f2e,#0d0812);border:1.5px solid var(--lav);border-radius:12px;padding:44px 32px;text-align:center;max-width:400px;width:100%;}
+.modal-icon{font-size:3.5rem;margin-bottom:14px;animation:hb 1.5s ease-in-out infinite;}
+@keyframes hb{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.modal-title{font-family:'Great Vibes',cursive;font-size:2.8rem;color:#fff;margin-bottom:8px;}
+.modal-sub{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:24px;}
+.modal-wa{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,#25d366,#128c3a);color:#fff;text-decoration:none;border-radius:4px;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;width:100%;justify-content:center;}
+.modal-close{font-size:0.65rem;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;cursor:pointer;background:none;border:none;margin-top:8px;}
+
+/* ── PETALS ── */
+.petal{position:fixed;pointer-events:none;z-index:0;animation:floatP linear infinite;opacity:0;}
+@keyframes floatP{0%{transform:translateY(105vh);opacity:0.35;}100%{transform:translateY(-5vh);opacity:0;}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:480px){
+  .hero-stats{gap:24px;}
+  .step:not(:last-child)::after{display:none;}
+  .steps-wrap{grid-template-columns:1fr 1fr;}
+  nav{padding:12px 16px;}
+  .nav-brand{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div id="petals"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-brand" href="#" onclick="showHome()">Make Your Moment</a>
+  <a class="nav-wa" href="https://wa.me/917406340661?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20invitation%20templates%20🌸" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+</nav>
+
+<!-- ══ HOME PAGE ══ -->
+<div id="homePage">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">✦ M · Y · M — Memories You'll Marvel at ✦</div>
+    <div class="hero-title">Make Your Moment</div>
+    <div class="hero-sub">Animated digital invitations — beautiful, personal, shareable</div>
+    <div class="hero-divider"></div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Templates</div></div>
+      <div class="stat"><div class="stat-num">₹99</div><div class="stat-label">Only</div></div>
+      <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Delivery</div></div>
+    </div>
+    <div class="scroll-hint">↓ explore templates ↓</div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section class="section">
+    <div class="section-eyebrow">✦ Our Collection ✦</div>
+    <div class="section-title">Choose Your Template</div>
+
+    <div class="templates-grid">
+
+      <!-- BIRTHDAY -->
+      <div class="template-card card-birthday" onclick="showProduct('birthday')">
+        <div class="card-preview">
+          <span class="card-badge badge-birthday">Birthday</span>
+          <span class="preview-emoji">🎂</span>
+          <span class="preview-emoji">🌸</span>
+          <span class="preview-emoji">✨</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Birthday Invitation</div>
+          <div class="card-desc">Animated sparkles, heart intro, photo slideshow, birthday counter & personal letter.</div>
+          <div class="card-footer">
+            <div class="card-price">₹99 <span>one time</span></div>
+            <button class="card-btn">View →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEDDING -->
+      <div class="template-card card-wedding" onclick="showProduct('wedding')">
+        <div class="card-preview">
+          <span class="card-badge badge-wedding">Wedding</span>
+          <span class="preview-emoji">💍</span>
+          <span class="preview-emoji">🌹</span>
+          <span class="preview-emoji">🕊️</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Wedding Invitation</div>
+          <div class="card-desc">Elegant animated wedding invite with floral intro, couple photos & RSVP button.</div>
+          <div class="card-footer">
+            <div class="card-price">₹99 <span>one time</span></div>
+            <button class="card-btn">View →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREGNANCY -->
+      <div class="template-card card-pregnancy" onclick="showProduct('pregnancy')">
+        <div class="card-preview">
+          <span class="card-badge badge-pregnancy">Pregnancy Reveal</span>
+          <span class="preview-emoji">🤰</span>
+          <span class="preview-emoji">👶</span>
+          <span class="preview-emoji">💜</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Pregnancy Reveal</div>
+          <div class="card-desc">Magical reveal animation with countdown, baby photos & heartfelt message for family.</div>
+          <div class="card-footer">
+            <div class="card-price">₹99 <span>one time</span></div>
+            <button class="card-btn">View →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-eyebrow">✦ Simple Process ✦</div>
+      <div class="section-title" style="margin-bottom:40px;">How It Works</div>
+      <div class="steps-wrap">
+        <div class="step">
+          <span class="step-icon">💳</span>
+          <div class="step-title">Pay 19</div>
+          <div class="step-desc">Secure Razorpay payment</div>
+        </div>
+        <div class="step">
+          <span class="step-icon">💬</span>
+          <div class="step-title">WhatsApp Us</div>
+          <div class="step-desc">Send name, date & photos</div>
+        </div>
+        <div class="step">
+          <span class="step-icon">✨</span>
+          <div class="step-title">We Personalise</div>
+          <div class="step-desc">Ready in 24 hours</div>
+        </div>
+        <div class="step">
+          <span class="step-icon">🌸</span>
+          <div class="step-title">Share & Surprise</div>
+          <div class="step-desc">Send the link anywhere</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Make Your Moment</div>
+    <div class="footer-tag">✦ Memories You'll Marvel at ✦</div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://instagram.com/makeyourmoment01" target="_blank">Instagram</a>
+      <a class="footer-link" href="https://wa.me/917406340661" target="_blank">WhatsApp</a>
+      <a class="footer-link" href="#" onclick="showProduct('birthday')">Birthday</a>
+      <a class="footer-link" href="#" onclick="showProduct('wedding')">Wedding</a>
+      <a class="footer-link" href="#" onclick="showProduct('pregnancy')">Pregnancy Reveal</a>
+    </div>
+    <div style="margin-top:20px;font-size:0.58rem;letter-spacing:2px;color:rgba(255,255,255,0.1);">© 2025 Make Your Moment · makeyourmoment.in</div>
+  </footer>
+
+</div><!-- end homePage -->
+
+<!-- ══ PRODUCT PAGE ══ -->
+<div class="product-page" id="productPage">
+  <div class="product-back" onclick="showHome()">← Back</div>
+  <div class="product-inner">
+
+    <div id="productTag" class="product-tag"></div>
+    <div id="productTitle" class="product-title"></div>
+    <div id="productDesc" class="product-desc"></div>
+
+    <div class="product-preview" id="productPreview">
+      <div class="product-preview-inner">
+        <span class="product-preview-emoji" id="productEmoji"></span>
+        <div class="product-preview-label" id="productLabel"></div>
+      </div>
+    </div>
+
+    <div class="product-layout">
+      <!-- INCLUDED -->
+      <div>
+        <div class="included-title">✦ What's Included</div>
+        <ul class="included-list" id="includedList"></ul>
+      </div>
+
+      <!-- BUY BOX -->
+      <div class="buy-box">
+        <div class="buy-price">₹19</div>
+        <div class="buy-note">one time · no hidden fees</div>
+        <button class="buy-btn" onclick="openRazorpay()">💳 Buy Now — ₹19</button>
+        <a class="demo-btn" id="demoBtn" href="#" target="_blank">👁 See Live Demo</a>
+        <a class="wa-btn" id="waBtn" href="#" target="_blank">💬 WhatsApp Us</a>
+        <div class="secure-note">🔒 Secured by Razorpay</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SUCCESS MODAL ══ -->
+<div class="modal" id="successModal">
+  <div class="modal-box">
+    <div class="modal-icon">🌸</div>
+    <div class="modal-title">Payment Done!</div>
+    <div class="modal-sub">Thank you so much! 💜<br>Now WhatsApp us with:<br><br>✦ Name of the person<br>✦ Their date / occasion details<br>✦ 3–4 photos<br>✦ A personal message<br><br>Your link will be ready in 24 hours 🌸</div>
+    <a class="modal-wa" id="modalWaBtn" href="#" target="_blank">💬 Send Details on WhatsApp</a>
+    <button class="modal-close" onclick="document.getElementById('successModal').classList.remove('show')">✕ Close</button>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const WA_NUMBER = '917406340661'; // ✏️ Replace with your WhatsApp number
+const RAZORPAY_KEY = 'rzp_live_SepJByE74U3kXf';
+
+// ── TEMPLATE DATA ──
+const templates = {
+  birthday: {
+    tag: 'Birthday',
+    tagColor: 'rgba(212,96,122,0.2)',
+    tagBorder: 'rgba(212,96,122,0.4)',
+    tagTextColor: '#f4a7b9',
+    title: 'Birthday Invitation',
+    desc: 'A magical animated birthday surprise your loved one will never forget. Touch-heart intro, photo slideshow, live birthday counter and a heartfelt personal letter — all in one beautiful link.',
+    emoji: '🎂',
+    label: 'Happy Birthday',
+    previewBg: 'radial-gradient(ellipse at 50% 30%,#2a0018 0%,#0d0018 60%,#04000d 100%)',
+    demoUrl: 'https://makeyourmoments01-stack.github.io/moment1/',
+    included: [
+      'Animated sparkles & floating petals',
+      'Touch-heart magical intro',
+      'Live birthday counter (days/hours/mins)',
+      'Photo slideshow (up to 4 photos)',
+      'Typewriter wish message',
+      'Personal letter from you',
+      'Birthday video section',
+      'Background music',
+      'Mobile perfect — share anywhere',
+    ],
+    waMsg: 'Hi! I just paid ₹99 for the Birthday Invitation 🎂 Here are my details:'
+  },
+  wedding: {
+    tag: 'Wedding',
+    tagColor: 'rgba(212,168,83,0.2)',
+    tagBorder: 'rgba(212,168,83,0.4)',
+    tagTextColor: '#d4a853',
+    title: 'Wedding Invitation',
+    desc: 'An elegant animated wedding invitation that feels like opening a real letter. Beautiful floral animations, couple photos, wedding details and an RSVP button — all in one shareable link.',
+    emoji: '💍',
+    label: 'We\'re Getting Married',
+    previewBg: 'radial-gradient(ellipse at 50% 30%,#1a1200 0%,#0d0c00 60%,#04040d 100%)',
+    demoUrl: 'https://makeyourmoments01-stack.github.io/moment1/',
+    included: [
+      'Elegant animated floral intro',
+      'Couple name & wedding date reveal',
+      'Beautiful photo gallery',
+      'Venue & ceremony details',
+      'RSVP button',
+      'Personal message from couple',
+      'Background romantic music',
+      'Mobile perfect — share on WhatsApp',
+    ],
+    waMsg: 'Hi! I just paid ₹99 for the Wedding Invitation 💍 Here are my details:'
+  },
+  pregnancy: {
+    tag: 'Pregnancy Reveal',
+    tagColor: 'rgba(201,184,239,0.2)',
+    tagBorder: 'rgba(201,184,239,0.4)',
+    tagTextColor: '#c9b8ef',
+    title: 'Pregnancy Reveal',
+    desc: 'A magical and emotional pregnancy reveal experience for your family and friends. Beautiful animations, baby countdown, reveal moment and a heartfelt announcement — all in one precious link.',
+    emoji: '🤰',
+    label: 'A Baby is Coming',
+    previewBg: 'radial-gradient(ellipse at 50% 30%,#1a0a1a 0%,#0d0818 60%,#04000d 100%)',
+    demoUrl: 'https://makeyourmoments01-stack.github.io/moment1/',
+    included: [
+      'Magical animated reveal intro',
+      'Baby arrival countdown',
+      'Photo gallery with parents',
+      'Baby gender reveal option',
+      'Heartfelt announcement message',
+      'Due date display',
+      'Soft background music',
+      'Mobile perfect — share on WhatsApp',
+    ],
+    waMsg: 'Hi! I just paid ₹99 for the Pregnancy Reveal 🤰 Here are my details:'
+  }
+};
+
+let currentTemplate = 'birthday';
+
+// ── SHOW HOME ──
+function showHome(){
+  document.getElementById('homePage').style.display='block';
+  document.getElementById('productPage').classList.remove('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── SHOW PRODUCT ──
+function showProduct(type){
+  currentTemplate = type;
+  const t = templates[type];
+
+  document.getElementById('homePage').style.display='none';
+  document.getElementById('productPage').classList.add('show');
+  window.scrollTo({top:0,behavior:'instant'});
+
+  // Fill data
+  const tag = document.getElementById('productTag');
+  tag.textContent = t.tag;
+  tag.style.background = t.tagColor;
+  tag.style.border = '1px solid ' + t.tagBorder;
+  tag.style.color = t.tagTextColor;
+  tag.style.fontSize = '0.6rem';
+  tag.style.letterSpacing = '4px';
+  tag.style.textTransform = 'uppercase';
+  tag.style.padding = '5px 14px';
+  tag.style.borderRadius = '100px';
+
+  document.getElementById('productTitle').textContent = t.title;
+  document.getElementById('productDesc').textContent = t.desc;
+  document.getElementById('productEmoji').textContent = t.emoji;
+  document.getElementById('productLabel').textContent = t.label;
+  document.getElementById('productPreview').style.background = t.previewBg;
+  document.getElementById('demoBtn').href = t.demoUrl;
+
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t.waMsg)}`;
+  document.getElementById('waBtn').href = waUrl;
+  document.getElementById('modalWaBtn').href = waUrl;
+
+  // Included list
+  const list = document.getElementById('includedList');
+  list.innerHTML = t.included.map(i=>`<li>${i}</li>`).join('');
+}
+
+// ── RAZORPAY ──
+function openRazorpay(){
+  const t = templates[currentTemplate];
+  const options = {
+    key: RAZORPAY_KEY,
+    amount: 1900,
+    currency: 'INR',
+    name: 'Make Your Moment 🌸',
+    description: t.title,
+    theme: {color: '#c9b8ef'},
+    handler: function(response){
+      document.getElementById('successModal').classList.add('show');
+    }
+  };
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+
+// ── STARS ──
+(function(){
+  const el=document.getElementById('stars');
+  for(let i=0;i<110;i++){
+    const s=document.createElement('div');
+    const sz=0.8+Math.random()*2;
+    s.style.cssText=`position:absolute;border-radius:50%;background:white;width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation:twinkle ${2+Math.random()*5}s ease-in-out infinite;animation-delay:${Math.random()*6}s;opacity:0;`;
+    el.appendChild(s);
+  }
+})();
+
+// ── PETALS ──
+(function(){
+  const el=document.getElementById('petals');
+  const em=['🌸','💗','✨','💕','🌷'];
+  for(let i=0;i<10;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.textContent=em[Math.floor(Math.random()*em.length)];
+    p.style.cssText=`left:${Math.random()*100}vw;font-size:${8+Math.random()*10}px;animation-duration:${16+Math.random()*18}s;animation-delay:${Math.random()*18}s;`;
+    el.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
